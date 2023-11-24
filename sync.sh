@@ -3,10 +3,13 @@
 current_date_time=$(date)
 
 # Nvim
-cp -r ~/.config/nvim ./nvim
+mkdir -p .config/nvim && cp -rf ~/.config/nvim .config
 
 # Kitty
-cp -r ~/.config/kitty ./kitty
+mkdir -p .config/kitty && cp -rf ~/.config/kitty .config
+
+# Zsh
+cp ~/.zshrc .
 
 git add .
 git commit -m "config of: $current_date_time"
