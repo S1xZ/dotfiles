@@ -2,13 +2,17 @@
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # LOCAL BIN
-export PATH="$PATH:/home/s1xz/.local/bin"
+export PATH="$PATH:${HOME}/.local/bin"
 
 # Oh my posh
 eval "$(oh-my-posh init zsh --config /home/s1xz/.config/ohmyposh/zen.toml)"
 
 # Setup fzf
 # ---------
+if [[ ! -d "${HOME}/.fzf" ]]; then
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+fi
+
 if [[ ! "$PATH" == */home/s1xz/.fzf/bin* ]]; then
   PATH="${PATH:+${PATH}:}/home/s1xz/.fzf/bin"
 fi
@@ -72,8 +76,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -a -1 --color=always $realpath'
 
 # Aliases
-alias ls='ls --color'
-alias l='ls -al'
+alias ls='eza --color=always'
+alias l='eza -al --color=always'
 alias vim='nvim'
 alias c='clear'
 
@@ -81,3 +85,7 @@ alias c='clear'
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
