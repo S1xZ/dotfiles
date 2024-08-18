@@ -18,7 +18,7 @@ _darcs
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
 
-\autobak.sh
+autobak.sh
 
 ^/README.*
 ^/LICENSE.*
