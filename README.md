@@ -1,1 +1,1 @@
-## Dotfiles of s1xz
+# Dotfiles of s1xz
