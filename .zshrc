@@ -1,7 +1,3 @@
-# Set lang
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
 # NVIM
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
@@ -10,6 +6,11 @@ export PATH="$PATH:${HOME}/.local/bin"
 
 # Oh my posh
 eval "$(oh-my-posh init zsh --config /home/s1xz/.config/ohmyposh/zen.toml)"
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # Setup fzf
 # ---------
