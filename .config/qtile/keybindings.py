@@ -56,7 +56,13 @@ keymaps = [
         [mod],
         "space",
         lazy.spawn("rofi -show drun"),
-        desc="Spawn a command using a prompt widget",
+        desc="Spawn rofi drun",
+    ),
+    Key(
+        [mod],
+        "r",
+        lazy.spawn("rofi -show run"),
+        desc="Spawn rofi run",
     ),
 ]
 

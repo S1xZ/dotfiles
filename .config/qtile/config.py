@@ -1,9 +1,10 @@
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from colors import cattpuccin_mocha
 from topbar import topbar
 from keybindings import keymaps
+import libqtile.layout as layout
 
 mod = "mod4"
 terminal = "wezterm"
@@ -12,9 +13,21 @@ terminal = "wezterm"
 keys = keymaps
 
 groups = [
-    Group("1", label="一"),
-    Group("2", label="二"),
-    Group("3", label="三"),
+    Group("1", label="一", spawn=["wezterm"]),
+    Group(
+        "2",
+        label="二",
+        matches=[Match(wm_class="google-chrome")],
+        spawn=["google-chrome-stable"],
+        exclusive=True,
+    ),
+    Group(
+        "3",
+        label="三",
+        matches=[Match(wm_class="vesktop"), Match(wm_class="spotify")],
+        spawn=["vesktop", "spotify"],
+        exclusive=True,
+    ),
     Group("4", label="四"),
     Group("5", label="五"),
     Group("6", label="六"),
@@ -44,7 +57,8 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(
+    layout.MonadTall(
+        ratio=0.55,
         border_normal=cattpuccin_mocha.crust.hex,
         border_focus=cattpuccin_mocha.teal.hex,
         border_width=2,
@@ -88,6 +102,11 @@ mouse = [
     Drag(
         [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
     ),
+    Click(
+        [mod, "shift"],
+        "Button1",
+        lazy.window.toggle_floating(),
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
@@ -98,6 +117,9 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
+    border_normal=cattpuccin_mocha.crust.hex,
+    border_focus=cattpuccin_mocha.teal.hex,
+    border_width=2,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -107,7 +129,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-    ]
+    ],
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
