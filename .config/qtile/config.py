@@ -13,20 +13,18 @@ terminal = "wezterm"
 keys = keymaps
 
 groups = [
-    Group("1", label="一", spawn=["wezterm"]),
+    Group("1", label="一"),
     Group(
         "2",
         label="二",
         matches=[Match(wm_class="google-chrome")],
         spawn=["google-chrome-stable"],
-        exclusive=True,
     ),
     Group(
         "3",
         label="三",
         matches=[Match(wm_class="vesktop"), Match(wm_class="spotify")],
-        spawn=["vesktop", "spotify"],
-        exclusive=True,
+        spawn=["spotify", "vesktop"],
     ),
     Group("4", label="四"),
     Group("5", label="五"),

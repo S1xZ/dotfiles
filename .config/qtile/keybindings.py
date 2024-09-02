@@ -3,6 +3,7 @@ from libqtile.lazy import lazy
 from libqtile import qtile
 
 mod = "mod4"
+alt = "mod1"
 terminal = "wezterm"
 
 keymaps = [
@@ -64,6 +65,13 @@ keymaps = [
         lazy.spawn("rofi -show run"),
         desc="Spawn rofi run",
     ),
+    Key(
+        [mod, "shift"],
+        "s",
+        lazy.spawn("flameshot"),
+        desc="Spawn flameshot",
+    ),
+    Key([alt], "Tab", lazy.group.next_window(), desc="Focus next window"),
 ]
 
 for vt in range(1, 8):

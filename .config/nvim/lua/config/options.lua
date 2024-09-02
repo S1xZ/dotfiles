@@ -3,12 +3,8 @@
 -- Add any additional options here
 local opt = vim.opt
 
--- Disable Mouse
-opt.mouse = ""
-
 -- Cursorline
 opt.cursorline = true
-opt.cursorlineopt = "number"
 
 -- Lang
 opt.spelllang = { "en", "cjk", "th" }
