@@ -68,7 +68,7 @@ keymaps = [
     Key(
         [mod, "shift"],
         "s",
-        lazy.spawn("flameshot"),
+        lazy.spawn("flameshot gui"),
         desc="Spawn flameshot",
     ),
     Key([alt], "Tab", lazy.group.next_window(), desc="Focus next window"),
