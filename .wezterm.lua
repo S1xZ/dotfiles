@@ -3,6 +3,7 @@ local launch_menu = {}
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
+config.enable_wayland = true
 
 -- Define launch_menu
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
@@ -23,6 +24,7 @@ end
 config.keys = {}
 
 config.launch_menu = launch_menu
+config.window_background_opacity = 0.95
 
 -- Themes
 config.color_scheme = "Catppuccin Mocha"
