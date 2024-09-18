@@ -83,7 +83,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -a -1 --color=always $r
 # Aliases
 alias ls='eza --color=always'
 alias l='eza -al --color=always'
-# alias vim='nvim'
+alias v='nvim'
 alias c='clear'
 alias lg='lazygit'
 
