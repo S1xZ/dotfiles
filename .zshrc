@@ -89,7 +89,7 @@ alias lg='lazygit'
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init --cmd z zsh)"
 
 
 export NVM_DIR="$HOME/.nvm"
