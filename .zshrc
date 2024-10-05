@@ -57,7 +57,6 @@ zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 
-
 # Keybindings
 bindkey -e
 bindkey '^p' history-search-backward
@@ -86,11 +85,11 @@ alias l='eza -al --color=always'
 alias v='nvim'
 alias c='clear'
 alias lg='lazygit'
+alias t='tmux'
 
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd z zsh)"
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
