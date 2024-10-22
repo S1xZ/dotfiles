@@ -5,7 +5,10 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:${HOME}/.local/bin"
 
 # Oh my posh
-eval "$(oh-my-posh init zsh --config /home/s1xz/.config/ohmyposh/zen.toml)"
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"
+
+# Gobrew
+export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -92,6 +95,5 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd z zsh)"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-source /usr/share/nvm/init-nvm.sh
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
