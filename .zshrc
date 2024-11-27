@@ -59,6 +59,8 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::istioctl
 
 # Keybindings
 bindkey -e
@@ -89,6 +91,7 @@ alias v='nvim'
 alias c='clear'
 alias lg='lazygit'
 alias t='tmux'
+alias kctl='kubectl'
 
 # Shell integrations
 eval "$(fzf --zsh)"
@@ -97,3 +100,6 @@ eval "$(zoxide init --cmd z zsh)"
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+eval "$(uv generate-shell-completion zsh)"

@@ -1,8 +1,4 @@
 return {
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    enable = false,
-    keys = false,
-    init = function() end,
-  },
+  { "nvim-neo-tree/neo-tree.nvim", enabled = false },
+  { "akinsho/bufferline.nvim", enabled = false },
 }
