@@ -1,3 +1,6 @@
+# BREW
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # NVIM
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
@@ -9,6 +12,7 @@ eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"
 
 # Gobrew
 export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
+export GOROOT="$HOME/.gobrew/current/go"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -98,10 +102,9 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd z zsh)"
 
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 eval "$(uv generate-shell-completion zsh)"
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit

@@ -3,39 +3,39 @@ local launch_menu = {}
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
-config.enable_wayland = true
 
 -- Define launch_menu
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-  config.default_prog = { "ubuntu2204.exe" }
-  table.insert(launch_menu, {
-    label = "PowerShell",
-    args = { "pwsh.exe", "-NoLogo" },
-  })
+	config.default_prog = { "ubuntu2204.exe" }
+	table.insert(launch_menu, {
+		label = "PowerShell",
+		args = { "pwsh.exe", "-NoLogo" },
+	})
 
-  -- Add WSL Ubuntu entry
-  table.insert(launch_menu, {
-    label = "WSL Ubuntu",
-    args = { "ubuntu2204.exe" },
-    cwd = "~",
-  })
+	-- Add WSL Ubuntu entry
+	table.insert(launch_menu, {
+		label = "WSL Ubuntu",
+		args = { "ubuntu2204.exe" },
+		cwd = "~",
+	})
 end
+
+config.max_fps = 255
 
 config.keys = {}
 
 config.launch_menu = launch_menu
-config.window_background_opacity = 0.95
 
 -- Themes
 config.color_scheme = "Catppuccin Mocha"
 
 config.font = wezterm.font_with_fallback({
-  "JetBrainsMono Nerd Font",
-  "Noto Sans Mono CJK JP",
-  "SOV_monospace",
+	"JetBrainsMono Nerd Font",
+	"Noto Sans Mono CJK JP",
+	"SOV_monospace",
 })
 
-config.font_size = 15
+config.font_size = 14
 
 -- Tabs config
 config.hide_tab_bar_if_only_one_tab = true
