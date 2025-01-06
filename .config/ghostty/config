@@ -1,0 +1,8 @@
+font-family = "JetBrainsMono Nerd Font"
+font-family = "Noto Sans Mono CJK JP"
+font-family = "SOV_monospace"
+
+font-size = 16
+theme = catppuccin-mocha
+
+window-padding-x = 25
