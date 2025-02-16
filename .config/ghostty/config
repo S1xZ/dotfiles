@@ -2,7 +2,7 @@ font-family = "JetBrainsMono Nerd Font"
 font-family = "Noto Sans Mono CJK JP"
 font-family = "SOV_monospace"
 
-font-size = 16
-theme = catppuccin-mocha
+font-size = 15
+theme = GruvboxDark
 
 window-padding-x = 25
