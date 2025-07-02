@@ -9,11 +9,18 @@ eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"
 
 # Gobrew
 export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
+export GOROOT="$HOME/.gobrew/current/go"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# Dotnet
+export DOTNET_ROOT="$(dirname $(which dotnet))"
+
+# Kube editor
+KUBE_EDITOR="nvim"
 
 # Setup fzf
 # ---------
@@ -92,6 +99,8 @@ alias c='clear'
 alias lg='lazygit'
 alias t='tmux'
 alias kctl='kubectl'
+alias kcx='kubectx'
+alias kns='kubens'
 
 # Shell integrations
 eval "$(fzf --zsh)"
@@ -105,3 +114,6 @@ export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_P
 eval "$(uv generate-shell-completion zsh)"
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+# PATH ENVS
+export REPOS="$HOME/Workspace/Repos"

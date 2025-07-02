@@ -6,3 +6,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "Visual", { bg = "#89b4fa", underline = true, italic = true })
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text" },
+  callback = function()
+    vim.opt_local.spell = false
+  end,
+})

@@ -2,7 +2,12 @@ font-family = "JetBrainsMono Nerd Font"
 font-family = "Noto Sans Mono CJK JP"
 font-family = "SOV_monospace"
 
-font-size = 16
-theme = catppuccin-mocha
+font-size = 16 
+theme = GruvboxDark
 
 window-padding-x = 25
+
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+macos-option-as-alt = true

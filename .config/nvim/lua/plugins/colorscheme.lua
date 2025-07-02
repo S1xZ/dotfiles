@@ -1,8 +1,11 @@
 return {
   {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
+    { "ellisonleao/gruvbox.nvim" },
+    {
+      "LazyVim/LazyVim",
+      opts = {
+        colorscheme = "gruvbox",
+      },
     },
   },
 }

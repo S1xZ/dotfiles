@@ -12,7 +12,18 @@ return {
         yamlls = {
           settings = {
             yaml = {
-              customTags = { "!reference sequence" },
+              validate = true,
+              schemaStore = {
+                enable = false,
+                url = "",
+              },
+              schemas = {
+                ["https://raw.githubusercontent.com/ansible/ansible-lint/refs/heads/main/src/ansiblelint/schemas/ansible.json"] = "ansible/*.yml",
+              },
+              customTags = { "!reference sequence", "!vault scalar" },
+              format = {
+                bracketSpacing = true,
+              },
             },
           },
           flags = {
