@@ -4,18 +4,19 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 # LOCAL BIN
 export PATH="$PATH:${HOME}/.local/bin"
 
-# Oh my posh
+# # Oh my posh
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"
 
 # Gobrew
 export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
 export GOROOT="$HOME/.gobrew/current/go"
+export PATH="$PATH:${HOME}/go/bin"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
+#
 # Dotnet
 export DOTNET_ROOT="$(dirname $(which dotnet))"
 
@@ -54,6 +55,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
 
 # Load completions
+fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 zinit cdreplay -q
 
@@ -102,18 +104,24 @@ alias kctl='kubectl'
 alias kcx='kubectx'
 alias kns='kubens'
 
+# Stupid as fuck but it works | pc alias
+declare -A region_map=( [6]="sg" [2]="hk" [3]="as" [4]="am" )
+for num in 6 2 3 4; do
+  region=${region_map[$num]}
+  for letter in c d f g h i o p x; do
+    alias kcx${num}${letter}="kcx privatecloud.${region}-pc-${num}${letter}"
+  done
+done
+
+alias kcx2a="kcx privatecloud.hk-qa-2a"
+alias kcx2q="kcx privatecloud.hk-poc-2q"
+
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd z zsh)"
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 eval "$(uv generate-shell-completion zsh)"
-
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
 # PATH ENVS
 export REPOS="$HOME/Workspace/Repos"

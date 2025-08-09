@@ -7,6 +7,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
+vim.g.editorconfig = false
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "text" },
   callback = function()

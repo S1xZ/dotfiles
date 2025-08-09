@@ -12,4 +12,18 @@ return {
       },
     },
   },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters = {
+        ["markdownlint-cli2"] = {
+          args = { "--config", HOME .. "/.config/.markdownlint-cli2.yaml", "--" },
+        },
+      },
+      formatters_by_ft = {
+        ["markdown"] = { "markdownlint-cli2" },
+      },
+    },
+  },
 }
