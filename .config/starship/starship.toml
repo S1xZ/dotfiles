@@ -1,0 +1,54 @@
+# ~/.config/starship.toml
+
+# Corresponds to Oh My Posh's final_space = true
+add_newline = true
+
+# Define the multi-line format for the left prompt
+# The \n creates a newline, separating the path/git line from the prompt character line
+format = """$directory$git_branch$git_status
+$character"""
+
+# Define the right prompt, which appears on the same line as the input
+right_format = "$cmd_duration"
+
+# Directory Module: Corresponds to Oh My Posh's 'path' segment
+[directory]
+format = "[$path]($style)" # Displays the full path
+style = "blue"            # Matches Oh My Posh's foreground color
+
+# Git Branch Module: Part of Oh My Posh's 'git' segment
+[git_branch]
+symbol = ""               # Oh My Posh's branch_icon was empty
+format = "[$branch]($style)"
+style = "bold purple"     # Starship's default for git_branch, a good visual match
+
+# Git Status Module: Part of Oh My Posh's 'git' segment
+[git_status]
+# Format to show '*' for dirty status and '⇣'/'⇡' for ahead/behind
+# By setting modified/staged to empty, their presence triggers the '*' without extra symbols
+format = '[($modified$staged)*$ahead_behind]($style)'
+conflicted = ""           # Not explicitly in OMP template
+ahead = "⇡"               # Matches OMP's ahead symbol
+behind = "⇣"              # Matches OMP's behind symbol
+diverged = "⇕"            # Combined ahead/behind symbol for diverged state
+up_to_date = ""           # No symbol for up-to-date
+untracked = ""            # Not explicitly in OMP template
+stashed = ""              # Not explicitly in OMP template
+modified = ""             # Suppress default '!' to use '*' logic
+staged = ""               # Suppress default '+' to use '*' logic
+renamed = ""              # Not explicitly in OMP template
+deleted = ""              # Not explicitly in OMP template
+typechanged = ""          # Not explicitly in OMP template
+style = "cyan"            # Matches OMP's <cyan> for status indicators
+
+# Command Duration Module: Corresponds to Oh My Posh's 'executiontime' segment
+[cmd_duration]
+min_time = 5000           # Matches Oh My Posh's threshold (in milliseconds)
+format = "took [$duration]($style)" # Displays human-readable duration
+style = "yellow"          # Matches Oh My Posh's foreground color
+
+# Character Module: Corresponds to Oh My Posh's final 'text' segment with conditional coloring
+[character]
+success_symbol = "[❯](bold magenta)" # Matches OMP's success color for '❯'
+error_symbol = "[❯](bold red)"     # Matches OMP's error color for '❯'
+format = "$symbol "               # Ensures the prompt character is printed with a space

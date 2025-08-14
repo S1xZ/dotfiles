@@ -4,6 +4,8 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 # LOCAL BIN
 export PATH="$PATH:${HOME}/.local/bin"
 
+# Cargo BIN
+export PATH="$PATH:${HOME}/.cargo/bin"
 # # Oh my posh
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"
 
@@ -120,8 +122,17 @@ alias kcx2q="kcx privatecloud.hk-poc-2q"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd z zsh)"
 
-export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+# export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 eval "$(uv generate-shell-completion zsh)"
+
+# fnm
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+# fcixt5
+export GTK_IM_MODULE="fcitx"
+export QT_IM_MODULE="fcitx"
+export SDL_IM_MODULE="fcitx"
+export XMODIFIERS="@im=fcitx"
 
 # PATH ENVS
 export REPOS="$HOME/Workspace/Repos"
