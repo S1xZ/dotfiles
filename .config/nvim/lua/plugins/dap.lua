@@ -1,17 +1,55 @@
 return {
-  "mfussenegger/nvim-dap",
-  recommended = true,
-  desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
+  {
+    "mfussenegger/nvim-dap",
+    recommended = true,
+    desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
 
-  dependencies = {
-    "rcarriga/nvim-dap-ui",
-    -- virtual text for the debugger
-    {
-      "theHamsta/nvim-dap-virtual-text",
-      opts = {},
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      -- virtual text for the debugger
+      {
+        "theHamsta/nvim-dap-virtual-text",
+        opts = {},
+      },
     },
-  },
 
+    opts = function()
+      local dap = require("dap")
+      if not dap.adapters["codelldb"] then
+        require("dap").adapters["codelldb"] = {
+          type = "server",
+          host = "localhost",
+          port = "${port}",
+          executable = {
+            command = "codelldb",
+            args = {
+              "--port",
+              "${port}",
+            },
+          },
+        }
+      end
+      for _, lang in ipairs({ "c", "cpp" }) do
+        dap.configurations[lang] = {
+          {
+            type = "codelldb",
+            request = "launch",
+            name = "Launch file",
+            program = function()
+              return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            end,
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "codelldb",
+            request = "attach",
+            name = "Attach to process",
+            pid = require("dap.utils").pick_process,
+            cwd = "${workspaceFolder}",
+          },
+        }
+      end
+    end,
   -- stylua: ignore
   keys = {
     { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
@@ -33,29 +71,30 @@ return {
     { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
   },
 
-  config = function()
-    -- load mason-nvim-dap here, after all adapters have been setup
-    if LazyVim.has("mason-nvim-dap.nvim") then
-      require("mason-nvim-dap").setup(LazyVim.opts("mason-nvim-dap.nvim"))
-    end
+    config = function()
+      -- load mason-nvim-dap here, after all adapters have been setup
+      if LazyVim.has("mason-nvim-dap.nvim") then
+        require("mason-nvim-dap").setup(LazyVim.opts("mason-nvim-dap.nvim"))
+      end
 
-    vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+      vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
-    for name, sign in pairs(LazyVim.config.icons.dap) do
-      sign = type(sign) == "table" and sign or { sign }
-      vim.fn.sign_define(
-        "Dap" .. name,
-        { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
-      )
-    end
+      for name, sign in pairs(LazyVim.config.icons.dap) do
+        sign = type(sign) == "table" and sign or { sign }
+        vim.fn.sign_define(
+          "Dap" .. name,
+          { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+        )
+      end
 
-    -- setup dap config by VsCode launch.json file
-    local vscode = require("dap.ext.vscode")
-    local json = require("plenary.json")
-    vscode.json_decode = function(str)
-      return vim.json.decode(json.json_strip_comments(str))
-    end
-  end,
+      -- setup dap config by VsCode launch.json file
+      local vscode = require("dap.ext.vscode")
+      local json = require("plenary.json")
+      vscode.json_decode = function(str)
+        return vim.json.decode(json.json_strip_comments(str))
+      end
+    end,
+  },
   {
     "rcarriga/nvim-dap-ui",
     -- virtual text for the debugger
