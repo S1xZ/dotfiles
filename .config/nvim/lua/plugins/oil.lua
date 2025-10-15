@@ -12,6 +12,6 @@ return {
     keys = {
       { "-", mode = { "n" }, "<CMD>Oil<CR>", { desc = "Open parent directory" } },
     },
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { { "nvim-mini/mini.icons", opts = {} } },
   },
 }

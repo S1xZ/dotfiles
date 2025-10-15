@@ -1,3 +1,21 @@
+---@param config {type?:string, args?:string[]|fun():string[]?}
+local function get_args(config)
+  local args = type(config.args) == "function" and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
+  local args_str = type(args) == "table" and table.concat(args, " ") or args --[[@as string]]
+
+  config = vim.deepcopy(config)
+  ---@cast args string[]
+  config.args = function()
+    local new_args = vim.fn.expand(vim.fn.input("Run with args: ", args_str)) --[[@as string]]
+    if config.type and config.type == "java" then
+      ---@diagnostic disable-next-line: return-type-mismatch
+      return new_args
+    end
+    return require("dap.utils").splitstr(new_args)
+  end
+  return config
+end
+
 return {
   {
     "mfussenegger/nvim-dap",
@@ -48,6 +66,27 @@ return {
             cwd = "${workspaceFolder}",
           },
         }
+      end
+      -- Go kitty integration
+      local function get_unused_port()
+        local uv = vim.loop
+        local server = uv.new_tcp()
+        assert(server:bind("127.0.0.1", 0)) -- OS allocates an unused port
+        local tcp_t = server:getsockname()
+        server:close()
+        assert(tcp_t and tcp_t.port > 0, "Failed to get an unused port")
+        return tcp_t.port
+      end
+
+      dap.adapters.go = function(callback, config)
+        local port = config.port or get_unused_port()
+        local term_buf = vim.api.nvim_create_buf(false, true)
+        vim.api.nvim_command("split")
+        vim.api.nvim_command("buffer " .. term_buf)
+        vim.fn.jobstart({ "dlv", "dap", "-l", "127.0.0.1:" .. port }, { term = true })
+        vim.defer_fn(function()
+          callback({ type = "server", host = "127.0.0.1", port = port })
+        end, 100)
       end
     end,
   -- stylua: ignore
@@ -149,6 +188,7 @@ return {
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
+        "debugpy",
       },
     },
     -- mason-nvim-dap is loaded when nvim-dap loads
