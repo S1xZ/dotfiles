@@ -136,3 +136,6 @@ export XMODIFIERS="@im=fcitx"
 
 # PATH ENVS
 export REPOS="$HOME/Workspace/Repos"
+
+# Task shell integrations
+eval "$(task --completion zsh)"
