@@ -45,6 +45,16 @@ return {
           },
         }
       end
+      if not dap.adapters["delve"] then
+        require("dap").adapters["delve"] = {
+          type = "server",
+          port = "${port}",
+          executable = {
+            command = "/usr/bin/kitty",
+            args = { "dlv", "dap", "-l", "127.0.0.1:${port}" },
+          },
+        }
+      end
       for _, lang in ipairs({ "c", "cpp" }) do
         dap.configurations[lang] = {
           {
